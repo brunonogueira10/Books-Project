@@ -18,12 +18,21 @@ books = [
         'tittle': 'Baby queen',
         'autor': 'Clarisse Liss',
     },
+    {
+        'id': 4,
+        'tittle': 'View FrontEnd',
+        'autor': 'Lara Louis',
+    },
 ]
+
 #Consult(all)
+
 @app.route('/books',methods=['GET'])
 def obter_books():
     return jsonify(books)
+
 #Consult(ID)
+
 @app.route('/books/<int:id>',methods=['GET'])
 def obter_book_for_id(id):
     for book in books:
@@ -31,6 +40,7 @@ def obter_book_for_id(id):
             return jsonify(book)
 
 #Edit
+
 @app.route('/books/<int:id>',methods=['PUT'])
 def edit_book_for_id(id):
     book_change = request.get_json()
@@ -40,12 +50,14 @@ def edit_book_for_id(id):
             return jsonify(books[indice])
 
 #Create
+
 @app.route('/books',methods=['POST'])
 def include_new_book():
     new_book = request.get_json()
     books.append(new_book)
 
 #Delete
+
 @app.route('/books/<int:id>',methods=['DELETE'])
 def delete_book(id):
     for indice, book in enumerate(books):
